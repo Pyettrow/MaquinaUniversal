@@ -10,15 +10,21 @@ package Controller;
  */
 public class Macro {
     
+    
     public static boolean Zero(String byCondicao){
+        Zero zero = new Zero(byCondicao);
         return false;
     }
     
-    public static boolean Add(String byCondicao){
-        return false;
+    public static int Add(String byCondicao){
+        Add add = new Add(byCondicao);
+        //return add.executa();
+        return 0;
     }
     
-    public static boolean Sub(String byCondicao){
-        return false;
+    public static int Sub(String byCondicao){
+        Sub sub = new Sub(byCondicao);
+        //return sub.executa();
+        return 0;
     }
 }

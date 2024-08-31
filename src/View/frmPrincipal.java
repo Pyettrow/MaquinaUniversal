@@ -19,6 +19,7 @@ import Controller.InterpretadorMonolitico;
  */
 public class frmPrincipal extends javax.swing.JFrame {
     ArrayList<String> fLinhasMonolitico = new ArrayList<>();
+    static ArrayList<Integer> fValorRegistrador = new ArrayList<>();
     
     public frmPrincipal() {
         initComponents();
@@ -139,10 +140,15 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btAbrirActionPerformed
 
     private void btExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExecutarActionPerformed
+        for (int i = 0; i < Integer.parseInt(txtQtdRegistradores.getText()); i++) {
+            fValorRegistrador.add(Integer.valueOf(JOptionPane.showInputDialog(null, "Valor do " + (i +1) + " registrador: ")));
+        }
+        
+        //Transforma o arquivo lido em linhas para poder tratar.
         try (BufferedReader br = new BufferedReader(new FileReader(txtCaminho.getText()))) {
             String linha;
             while ((linha = br.readLine()) != null) {
-                fLinhasMonolitico.add(linha); // Adiciona cada linha à lista
+                fLinhasMonolitico.add(linha);
             }
         } catch (IOException e ) {
             JOptionPane.showMessageDialog(null, "Problema com leitura do arquivo");

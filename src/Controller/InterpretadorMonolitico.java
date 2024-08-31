@@ -35,7 +35,7 @@ public class InterpretadorMonolitico {
             } else if (mLinha.startsWith("add")) {
                 ProcessaOperacao(mLinha);
             } else if (mLinha.startsWith("sub")) {
-               ProcessaOperacao(mLinha);
+                ProcessaOperacao(mLinha);
             } else {
                 mRetorno = "Instrução desconhecida";
                 break;
