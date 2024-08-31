@@ -9,5 +9,10 @@ package Controller;
  * @author PC
  */
 public class Sub {
+    String fCondicao = "";
+    
+    public Sub(String byCondicao) {
+        this.fCondicao = byCondicao;
+    }
     
 }

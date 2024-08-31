@@ -12,6 +12,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import Controller.InterpretadorMonolitico;
+import Model.Registrador;
 
 /**
  *
@@ -19,7 +20,7 @@ import Controller.InterpretadorMonolitico;
  */
 public class frmPrincipal extends javax.swing.JFrame {
     ArrayList<String> fLinhasMonolitico = new ArrayList<>();
-    static ArrayList<Integer> fValorRegistrador = new ArrayList<>();
+    ArrayList<Registrador> fListRegistradores = new ArrayList<>();
     
     public frmPrincipal() {
         initComponents();
@@ -141,7 +142,8 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExecutarActionPerformed
         for (int i = 0; i < Integer.parseInt(txtQtdRegistradores.getText()); i++) {
-            fValorRegistrador.add(Integer.valueOf(JOptionPane.showInputDialog(null, "Valor do " + (i +1) + " registrador: ")));
+            Registrador reg = new Registrador(i, Integer.parseInt(JOptionPane.showInputDialog(null, "Valor do " + (i + 1) + " registrador: ")));
+            fListRegistradores.add(reg);
         }
         
         //Transforma o arquivo lido em linhas para poder tratar.
@@ -154,7 +156,7 @@ public class frmPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Problema com leitura do arquivo");
         }
         
-        InterpretadorMonolitico interpretador = new InterpretadorMonolitico(fLinhasMonolitico);
+        InterpretadorMonolitico interpretador = new InterpretadorMonolitico(fLinhasMonolitico, fListRegistradores);
         interpretador.executar();
     }//GEN-LAST:event_btExecutarActionPerformed
 
@@ -191,6 +193,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new frmPrincipal().setVisible(true);
             }
