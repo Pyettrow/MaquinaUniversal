@@ -17,7 +17,7 @@ public class Registrador {
 
     public Registrador(int byNumeroReg, int byValor) {
         this.Nome = fAlfabeto[byNumeroReg];
-        this.Valor = Valor;
+        this.Valor = byValor;
     }
 
     public String getNome() {

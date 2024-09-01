@@ -13,7 +13,7 @@ public class Macro {
     
     public static boolean Zero(String byCondicao){
         Zero zero = new Zero(byCondicao);
-        return false;
+        return zero.executa();
     }
     
     public static int Add(String byCondicao){

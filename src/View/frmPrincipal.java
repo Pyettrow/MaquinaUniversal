@@ -25,6 +25,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     public frmPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
+        txtResultado.setEditable(false);
     }
 
     /**
@@ -141,7 +142,17 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btAbrirActionPerformed
 
     private void btExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExecutarActionPerformed
-        for (int i = 0; i < Integer.parseInt(txtQtdRegistradores.getText()); i++) {
+        if (txtQtdRegistradores.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Inform a quantidade de registradores.");
+            return;
+        }
+        
+        if (Integer.parseInt(txtQtdRegistradores.getText()) <= 0) {
+            JOptionPane.showMessageDialog(null, "Necessário informar pelo menos um registrador;");
+            return;
+        }
+        
+        for (int i = 0; i < Integer.parseInt(txtQtdRegistradores.getText()); i++) {        
             Registrador reg = new Registrador(i, Integer.parseInt(JOptionPane.showInputDialog(null, "Valor do " + (i + 1) + " registrador: ")));
             fListRegistradores.add(reg);
         }
@@ -156,12 +167,12 @@ public class frmPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Problema com leitura do arquivo");
         }
         
-        InterpretadorMonolitico interpretador = new InterpretadorMonolitico(fLinhasMonolitico, fListRegistradores);
+        InterpretadorMonolitico interpretador = new InterpretadorMonolitico(fLinhasMonolitico, fListRegistradores, this);
         interpretador.executar();
     }//GEN-LAST:event_btExecutarActionPerformed
 
     public void EscreveResultado(String byNovaLinha){
-        txtResultado.setText(txtResultado.getText() + "\n" + byNovaLinha);
+        txtResultado.setText(txtResultado.getText().concat(byNovaLinha));
     }
     
     /**

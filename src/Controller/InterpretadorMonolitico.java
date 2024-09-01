@@ -4,6 +4,7 @@
  */
 package Controller;
 import Model.Registrador;
+import View.frmPrincipal;
 import java.util.ArrayList;
 
 /**
@@ -11,13 +12,15 @@ import java.util.ArrayList;
  * @author PC
  */
 public class InterpretadorMonolitico {
-    private ArrayList<String> fListLinhas = new ArrayList<String>();
-    private ArrayList<Registrador> fListRegistradores = new ArrayList();
+    private ArrayList<String> fListLinhas = new ArrayList<>();
+    private static ArrayList<Registrador> fListRegistradores = new ArrayList();
     private int fLinhaAtual = 0;
+    private final frmPrincipal FormPrincipal;
     
-    public InterpretadorMonolitico(ArrayList<String> byListString, ArrayList<Registrador> byListRegistradores) {
+    public InterpretadorMonolitico(ArrayList<String> byListString, ArrayList<Registrador> byListRegistradores, frmPrincipal byForm) {
         this.fListLinhas = byListString;
         this.fListRegistradores = byListRegistradores;
+        this.FormPrincipal = byForm;
     }
 
     public String executar() {
@@ -41,7 +44,7 @@ public class InterpretadorMonolitico {
             } else {
                 mRetorno = "Instrução desconhecida";
                 break;
-            }
+            }    
         }
         return mRetorno;
     }
@@ -51,7 +54,7 @@ public class InterpretadorMonolitico {
         String condVerdadeiro = byLinha.substring(byLinha.indexOf("então") + 5, byLinha.indexOf("senão")).trim();
         String condFalso = byLinha.substring(byLinha.indexOf("senão") + 5, byLinha.length()).trim();
 
-        if (Macro.Zero(condicao) == true) {
+        if (Macro.Zero(condicao)) {
             ProcessaOperacao(condVerdadeiro);
         } else {
             ProcessaOperacao(condFalso);
@@ -78,17 +81,42 @@ public class InterpretadorMonolitico {
     }
 
     private void processarSalto(String linha) {
+        ImprimeLinha(fLinhaAtual);
+        
         String[] partes = linha.trim().split(" ");
         fLinhaAtual = Integer.parseInt(partes[1]) - 1;
     }
     
-    //Método para alterar o valor de um registrador passando somente o seu nome
-    public void AtualizarValorRegistrador(String byNome, int byNovoValor) {
+    //Método que irá buscar o valor do registrado passando como parâmentro somente seu nome
+    public static int BuscaValorRegistrador(String byRegistradorNome){
         for (Registrador reg : fListRegistradores) {
-            if (reg.getNome().toUpperCase().equals(byNome.toUpperCase())) {
+            if (reg.getNome().toUpperCase().equals(byRegistradorNome.toUpperCase())) {
+                return reg.getValor();
+            }
+        }
+        return -1;
+    }
+    
+    //Método para alterar o valor de um registrador passando somente o seu nome
+    public static void AtualizarValorRegistrador(String byRegistradorNome, int byNovoValor) {
+        for (Registrador reg : fListRegistradores) {
+            if (reg.getNome().toUpperCase().equals(byRegistradorNome.toUpperCase())) {
                 reg.setValor(byNovoValor);
                 break;
             }
         }
+    }
+    
+    //Método que a cada linha processada irá printar o txtResultado.
+    public void ImprimeLinha(int byLinha){
+        String mValorRegistradores = "";
+        for (Registrador reg : fListRegistradores) {
+            if (mValorRegistradores.equals("")){
+                mValorRegistradores = String.valueOf(reg.getValor());
+            }else{
+                mValorRegistradores += ", " + reg.getValor();
+            }
+        }
+        FormPrincipal.EscreveResultado("(" + (byLinha + 1) + ", (" + mValorRegistradores + "))");
     }
 }

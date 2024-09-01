@@ -3,16 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controller;
-
 /**
  *
  * @author PC
  */
 public class Zero {
-    String fCondicao = "";
-    
+    String fRegistradorNome;
+    int fRegistradorValor;
+
     public Zero(String byCondicao) {
-        this.fCondicao = byCondicao;
+        String[] mSplitCond = byCondicao.split("_");
+        this.fRegistradorNome = mSplitCond[1];
+        this.fRegistradorValor = InterpretadorMonolitico.BuscaValorRegistrador(fRegistradorNome);
     }
     
+    public boolean executa(){
+        return fRegistradorValor == 0;
+    }
 }
