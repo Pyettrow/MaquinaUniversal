@@ -27,4 +27,16 @@ public class Macro {
         //return sub.executa();
         return 0;
     }
+    
+    public static boolean Maior(){
+        return true;
+    }
+    
+    public static boolean Menor(){
+        return true;
+    }
+    
+    public static boolean NaoSeiAinda(){
+        return true;
+    }
 }
