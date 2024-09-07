@@ -27,16 +27,14 @@ public class Macro {
         //return sub.executa();
         return 0;
     }
-    
-    public static boolean Maior(){
-        return true;
+       
+    public static boolean Menor(String byCondicao){
+        MaiorMenor mm = new MaiorMenor(byCondicao);
+        return mm.executa();
     }
     
-    public static boolean Menor(){
-        return true;
-    }
-    
-    public static boolean NaoSeiAinda(){
-        return true;
+    public static boolean Igual(String byCondicao){
+        Igual i = new Igual(byCondicao);
+        return i.executa();
     }
 }

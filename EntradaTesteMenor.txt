@@ -1,0 +1,2 @@
+1: se menor_a_b então vá_para 9 senão vá_para 2
+2: vá_para 1

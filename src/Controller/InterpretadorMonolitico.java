@@ -54,10 +54,22 @@ public class InterpretadorMonolitico {
         String condVerdadeiro = byLinha.substring(byLinha.indexOf("então") + 5, byLinha.indexOf("senão")).trim();
         String condFalso = byLinha.substring(byLinha.indexOf("senão") + 5, byLinha.length()).trim();
 
-        if (Macro.Zero(condicao)) {
-            ProcessaOperacao(condVerdadeiro);
-        } else {
-            ProcessaOperacao(condFalso);
+        if (condicao.startsWith("zero_")) {
+            if (Macro.Zero(condicao)) {
+                ProcessaOperacao(condVerdadeiro);
+            } else {
+                ProcessaOperacao(condFalso);
+            }
+        }else if (condicao.startsWith("maior_")) {
+            
+        }else if (condicao.startsWith("menor_")) {
+            if (Macro.Menor(condicao)) {
+                
+            }
+        }else if (condicao.startsWith("igual_")) {
+            if (Macro.Igual(condicao)) {
+                
+            }
         }
     }
     
