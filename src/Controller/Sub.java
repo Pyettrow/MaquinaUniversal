@@ -9,10 +9,16 @@ package Controller;
  * @author PC
  */
 public class Sub {
-    String fCondicao = "";
+    String fRegistradorNome;
+    int fRegistradorValor;
     
     public Sub(String byCondicao) {
-        this.fCondicao = byCondicao;
+        String[] mSplitCond = byCondicao.split("_");
+        this.fRegistradorNome = mSplitCond[1];
+        this.fRegistradorValor = this.fRegistradorValor - InterpretadorMonolitico.BuscaValorRegistrador(fRegistradorNome);
     }
     
+    public int executa(){
+        return this.fRegistradorValor;
+    }
 }
