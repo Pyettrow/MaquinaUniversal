@@ -28,8 +28,8 @@ public class InterpretadorMonolitico {
         String mRetorno = "";
         
         while(true){
+            ImprimeLinha(fLinhaAtual);
             if (fLinhaAtual > fListLinhas.size() - 1) { break; }
-            
             mLinha = fListLinhas.get(fLinhaAtual).substring(3, fListLinhas.get(fLinhaAtual).length());
             if (mLinha.startsWith("se")) {
                 processarCondicional(mLinha);
@@ -76,25 +76,24 @@ public class InterpretadorMonolitico {
     private void ProcessaFaca(String byLinha){
         String mPartes[] = byLinha.split(" ");
         ProcessaOperacao(mPartes[1]);
-        if (mPartes.length >= 2 &&  mPartes.length <= 3) {
+        if (mPartes.length >= 2) {
+            if (mPartes[2].equals("vá_para")) {
             processarSalto(mPartes[2] + " " + mPartes[3]);
+            }
         }        
     }
     
     private void ProcessaOperacao(String byLinha){
         if(byLinha.contains("add_")){
-            String[] mLinhaSplit = byLinha.split("_");
-            AtualizarValorRegistrador(mLinhaSplit[1], Macro.Add(byLinha));
+            Macro.Add(byLinha);
         }else if(byLinha.contains("sub_")){
-            AtualizarValorRegistrador("A", Macro.Sub(byLinha));
+            Macro.Sub(byLinha);
         }if(byLinha.contains("vá_para")){
             processarSalto(byLinha);
         }
     }
-
+   
     private void processarSalto(String linha) {
-        ImprimeLinha(fLinhaAtual);
-        
         String[] partes = linha.trim().split(" ");
         fLinhaAtual = Integer.parseInt(partes[1]) - 1;
     }

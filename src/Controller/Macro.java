@@ -10,22 +10,25 @@ package Controller;
  */
 public class Macro {
     
-    
-    public static boolean Zero(String byCondicao){
-        Zero zero = new Zero(byCondicao);
-        return zero.executa();
+    public static boolean Zero(String byCondicao){        
+        String[] mSplitCond = byCondicao.split("_");
+        String mRegistradorNome = mSplitCond[1];
+        int mRegistradorValor = InterpretadorMonolitico.BuscaValorRegistrador(mRegistradorNome); 
+        return mRegistradorValor == 0;
     }
     
-    public static int Add(String byCondicao){
-        Add add = new Add(byCondicao);
-        //return add.executa();
-        return 0;
+    public static void Add(String byCondicao){
+        String[] mSplitCond = byCondicao.split("_");
+        String mRegistradorNome = mSplitCond[1];
+        int mRegistradorValor = InterpretadorMonolitico.BuscaValorRegistrador(mRegistradorNome);        
+        InterpretadorMonolitico.AtualizarValorRegistrador(mRegistradorNome, mRegistradorValor + 1);
     }
     
-    public static int Sub(String byCondicao){
-        Sub sub = new Sub(byCondicao);
-        //return sub.executa();
-        return 0;
+    public static void Sub(String byCondicao){
+        String[] mSplitCond = byCondicao.split("_");
+        String mRegistradorNome = mSplitCond[1];
+        int mRegistradorValor = InterpretadorMonolitico.BuscaValorRegistrador(mRegistradorNome);        
+        InterpretadorMonolitico.AtualizarValorRegistrador(mRegistradorNome, mRegistradorValor - 1);
     }
        
     public static boolean Menor(String byCondicao){

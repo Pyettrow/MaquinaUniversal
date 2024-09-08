@@ -172,7 +172,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btExecutarActionPerformed
 
     public void EscreveResultado(String byNovaLinha){
-        txtResultado.setText(txtResultado.getText().concat(byNovaLinha));
+        txtResultado.setText(txtResultado.getText().concat(byNovaLinha + "\n\r"));
     }
     
     /**
