@@ -35,8 +35,8 @@ public class MaiorMenor {
     }
     
     public boolean executa(){
-        InterpretadorMonolitico mInterpretador = new InterpretadorMonolitico(fLinhasMonolitico, fListRegistradores, null);
-        mInterpretador.executar();
+//        InterpretadorMonolitico mInterpretador = new InterpretadorMonolitico(fLinhasMonolitico, fListRegistradores, frmPrincipal);
+//        mInterpretador.executar();
         return true;
     }
 }

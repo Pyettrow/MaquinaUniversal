@@ -6,7 +6,7 @@ package Controller;
 import Model.Registrador;
 import View.frmPrincipal;
 import java.util.ArrayList;
-
+import javax.swing.JFrame;
 /**
  *
  * @author PC
@@ -15,24 +15,30 @@ public class InterpretadorMonolitico {
     private ArrayList<String> fListLinhas = new ArrayList<>();
     private static ArrayList<Registrador> fListRegistradores = new ArrayList();
     private int fLinhaAtual = 0;
-    private final frmPrincipal FormPrincipal;
+    private int fSubLinha = 0;
+    private frmPrincipal frmPrincipal;
     
-    public InterpretadorMonolitico(ArrayList<String> byListString, ArrayList<Registrador> byListRegistradores, frmPrincipal byForm) {
+    public InterpretadorMonolitico(ArrayList<String> byListString, ArrayList<Registrador> byListRegistradores, JFrame byForm, int bySubLinha) {
         this.fListLinhas = byListString;
         this.fListRegistradores = byListRegistradores;
-        this.FormPrincipal = byForm;
+        this.frmPrincipal = (frmPrincipal) byForm;
+        if (bySubLinha > 0) {
+            this.fSubLinha = bySubLinha;
+        }
     }
 
-    public String executar() {
+    public boolean executar() {
         String mLinha = "";
-        String mRetorno = "";
+        boolean mRetorno = false;
         
         while(true){
+            
             ImprimeLinha(fLinhaAtual);
             if (fLinhaAtual > fListLinhas.size() - 1) { break; }
+            
             mLinha = fListLinhas.get(fLinhaAtual).substring(3, fListLinhas.get(fLinhaAtual).length());
             if (mLinha.startsWith("se")) {
-                processarCondicional(mLinha);
+                mRetorno = processarCondicional(mLinha);
             } else if (mLinha.startsWith("vá_para")) {
                 ProcessaOperacao(mLinha);
             } else if (mLinha.startsWith("faça")) {
@@ -42,34 +48,35 @@ public class InterpretadorMonolitico {
             } else if (mLinha.startsWith("sub")) {
                 ProcessaOperacao(mLinha);
             } else {
-                mRetorno = "Instrução desconhecida";
+                mRetorno = false;
                 break;
             }    
         }
         return mRetorno;
     }
     
-    private void processarCondicional(String byLinha) {        
+    private boolean processarCondicional(String byLinha) {        
+        boolean mRetorno = false;
         String condicao = byLinha.substring(byLinha.indexOf("se") + 2, byLinha.indexOf("então")).trim();
         String condVerdadeiro = byLinha.substring(byLinha.indexOf("então") + 5, byLinha.indexOf("senão")).trim();
         String condFalso = byLinha.substring(byLinha.indexOf("senão") + 5, byLinha.length()).trim();
 
         if (condicao.startsWith("zero_")) {
-            if (Macro.Zero(condicao)) {
-                ProcessaOperacao(condVerdadeiro);
-            } else {
-                ProcessaOperacao(condFalso);
-            }
+            mRetorno = Macro.Zero(condicao);
         }else if (condicao.startsWith("maior_")) {
             
         }else if (condicao.startsWith("menor_")) {
-            if (Macro.Menor(condicao)) {
-                
-            }
+            
         }else if (condicao.startsWith("igual_")) {
-            if (Macro.Igual(condicao)) {
-                
-            }
+            mRetorno = Macro.Igual(condicao, this.frmPrincipal, fLinhaAtual + 1);                
+        }
+        
+        if (mRetorno) {
+            ProcessaOperacao(condVerdadeiro);
+            return true;
+        } else {
+            ProcessaOperacao(condFalso);
+            return false;
         }
     }
     
@@ -121,6 +128,7 @@ public class InterpretadorMonolitico {
     //Método que a cada linha processada irá printar o txtResultado.
     public void ImprimeLinha(int byLinha){
         String mValorRegistradores = "";
+        String mTextoImpressao = "";
         for (Registrador reg : fListRegistradores) {
             if (mValorRegistradores.equals("")){
                 mValorRegistradores = String.valueOf(reg.getValor());
@@ -128,6 +136,15 @@ public class InterpretadorMonolitico {
                 mValorRegistradores += ", " + reg.getValor();
             }
         }
-        FormPrincipal.EscreveResultado("(" + (byLinha + 1) + ", (" + mValorRegistradores + "))");
+
+        if (fSubLinha == 0) {
+            mTextoImpressao = "(" + (byLinha + 1) + ", (" + mValorRegistradores + "))";
+        }else{
+            mTextoImpressao = "--(" + (byLinha + 1) + ", (" + mValorRegistradores + "))";
+        }
+        if (byLinha <= fListLinhas.size()) 
+            mTextoImpressao += "    ->" + fListLinhas.get(byLinha);
+        
+        this.frmPrincipal.EscreveResultado(mTextoImpressao);
     }
 }

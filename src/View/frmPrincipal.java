@@ -26,6 +26,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         txtResultado.setEditable(false);
+        
+        txtCaminho.setText("C:\\Users\\PC\\Documents\\GitHub\\MaquinaUniversal\\EntradaTesteIgual.txt");
     }
 
     /**
@@ -148,7 +150,12 @@ public class frmPrincipal extends javax.swing.JFrame {
         }
         
         if (Integer.parseInt(txtQtdRegistradores.getText()) <= 0) {
-            JOptionPane.showMessageDialog(null, "Necessário informar pelo menos um registrador;");
+            JOptionPane.showMessageDialog(null, "Necessário informar pelo menos um registrador.");
+            return;
+        }
+        
+        if(txtCaminho.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Necessário selecionar txt com programa.");
             return;
         }
         
@@ -167,7 +174,8 @@ public class frmPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Problema com leitura do arquivo");
         }
         
-        InterpretadorMonolitico interpretador = new InterpretadorMonolitico(fLinhasMonolitico, fListRegistradores, this);
+        txtResultado.setText("");
+        InterpretadorMonolitico interpretador = new InterpretadorMonolitico(fLinhasMonolitico, fListRegistradores, this, 0);
         interpretador.executar();
     }//GEN-LAST:event_btExecutarActionPerformed
 

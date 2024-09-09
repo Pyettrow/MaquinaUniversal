@@ -4,6 +4,8 @@
  */
 package Controller;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author PC
@@ -36,8 +38,8 @@ public class Macro {
         return mm.executa();
     }
     
-    public static boolean Igual(String byCondicao){
-        Igual i = new Igual(byCondicao);
+    public static boolean Igual(String byCondicao, JFrame byFrm, int byLinhaPai){
+        Igual i = new Igual(byCondicao, byFrm, byLinhaPai);
         return i.executa();
     }
 }
