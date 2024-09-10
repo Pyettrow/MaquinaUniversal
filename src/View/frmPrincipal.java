@@ -27,7 +27,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         txtResultado.setEditable(false);
         
-        txtCaminho.setText("C:\\Users\\PC\\Documents\\GitHub\\MaquinaUniversal\\EntradaTesteIgual.txt");
+        //txtCaminho.setText("C:\\Users\\PC\\Documents\\GitHub\\MaquinaUniversal\\EntradaTesteMaior.txt");
     }
 
     /**

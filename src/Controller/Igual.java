@@ -32,7 +32,7 @@ public class Igual {
     }
     
     private void PreenchendoNorma(){
-        /**Se termina com: 
+        /* Se termina com: 
          * vá_para 9 = true
          * vá_para 10 = false*/
         fLinhasMonolitico.add("1: faça sub_a vá_para 2");

@@ -64,9 +64,9 @@ public class InterpretadorMonolitico {
         if (condicao.startsWith("zero_")) {
             mRetorno = Macro.Zero(condicao);
         }else if (condicao.startsWith("maior_")) {
-            
+            mRetorno = Macro.MenorMaior(condicao, this.frmPrincipal, fLinhaAtual + 1, 2);
         }else if (condicao.startsWith("menor_")) {
-            
+            mRetorno = Macro.MenorMaior(condicao, this.frmPrincipal, fLinhaAtual + 1, 1);
         }else if (condicao.startsWith("igual_")) {
             mRetorno = Macro.Igual(condicao, this.frmPrincipal, fLinhaAtual + 1);                
         }
@@ -85,7 +85,7 @@ public class InterpretadorMonolitico {
         ProcessaOperacao(mPartes[1]);
         if (mPartes.length >= 2) {
             if (mPartes[2].equals("vá_para")) {
-            processarSalto(mPartes[2] + " " + mPartes[3]);
+                processarSalto(mPartes[2] + " " + mPartes[3]);
             }
         }        
     }

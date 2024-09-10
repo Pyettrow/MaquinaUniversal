@@ -33,8 +33,11 @@ public class Macro {
         InterpretadorMonolitico.AtualizarValorRegistrador(mRegistradorNome, mRegistradorValor - 1);
     }
        
-    public static boolean Menor(String byCondicao){
-        MaiorMenor mm = new MaiorMenor(byCondicao);
+    /**
+     * byMenorMaior: 1 - Menor | 2 - Maior
+     */
+    public static boolean MenorMaior(String byCondicao, JFrame byFrm, int byLinhaPai, int byMenorMaior){
+        MaiorMenor mm = new MaiorMenor(byCondicao, byFrm, byLinhaPai, byMenorMaior);
         return mm.executa();
     }
     
