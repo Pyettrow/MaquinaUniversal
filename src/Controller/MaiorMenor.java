@@ -37,14 +37,11 @@ public class MaiorMenor {
     }
     
     private void PreenchendoNorma(){
-        /* Se termina com: 
-         * vá_para 9 =  true  | A < B
-         * vá_para 10 = false | A > B*/
         fLinhasMonolitico.add("1: se zero_a então vá_para 9 senão vá_para 2");
         fLinhasMonolitico.add("2: se zero_b então vá_para 5 senão vá_para 3");
         fLinhasMonolitico.add("3: faça sub_a vá_para 4");
         fLinhasMonolitico.add("4: faça sub_b vá_para 1");
-        fLinhasMonolitico.add("5: se zero_a então vá_para 1 senão vá_para 10");
+        fLinhasMonolitico.add("5: se zero_b então vá_para 1 senão vá_para 10");
     }
     
     public boolean executa(){

@@ -177,6 +177,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         txtResultado.setText("");
         InterpretadorMonolitico interpretador = new InterpretadorMonolitico(fLinhasMonolitico, fListRegistradores, this, 0);
         interpretador.executar();
+        
+        fListRegistradores.clear();
+        fLinhasMonolitico.clear();
     }//GEN-LAST:event_btExecutarActionPerformed
 
     public void EscreveResultado(String byNovaLinha){
