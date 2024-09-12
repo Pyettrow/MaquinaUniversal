@@ -142,7 +142,7 @@ public class InterpretadorMonolitico {
         }else{
             mTextoImpressao = "--(" + (byLinha + 1) + ", (" + mValorRegistradores + "))";
         }
-        if (byLinha <= fListLinhas.size()) 
+        if (byLinha < fListLinhas.size()) 
             mTextoImpressao += "    ->" + fListLinhas.get(byLinha);
         
         this.frmPrincipal.EscreveResultado(mTextoImpressao);
