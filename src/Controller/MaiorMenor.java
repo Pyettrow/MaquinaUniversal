@@ -26,14 +26,16 @@ public class MaiorMenor {
     public MaiorMenor(String byCondicao, JFrame byFrm, int byLinha, int byMenorMaior) {
         this.frmPrincipal = (frmPrincipal) byFrm;        
         this.fLinhaPai = byLinha;        
-        this.fMenorMaior = byMenorMaior; 
-        //Considerando que a entrada do MaiorMenor seja: menor_a_b
+        this.fMenorMaior = byMenorMaior;         
         String[] mSplitCond = byCondicao.split("_");
         Registrador reg1 = new Registrador(0, InterpretadorMonolitico.BuscaValorRegistrador(mSplitCond[1]));
         fListRegistradores.add(reg1);
         Registrador reg2 = new Registrador(1, InterpretadorMonolitico.BuscaValorRegistrador(mSplitCond[2]));
         fListRegistradores.add(reg2);
-        PreenchendoNormaMenor();
+        if(byMenorMaior == 1)
+            PreenchendoNormaMenor();
+        else
+            PreenchendoNormaMaior();
     }
     
     private void PreenchendoNormaMenor(){
@@ -51,12 +53,14 @@ public class MaiorMenor {
         fLinhasMonolitico.add("8: se zero_a então vá_para 9 senão vá_para 10");
     }
     
-    private void PreenchendoNorma(){
-        fLinhasMonolitico.add("1: se zero_a então vá_para 9 senão vá_para 2");
-        fLinhasMonolitico.add("2: se zero_b então vá_para 5 senão vá_para 3");
+    private void PreenchendoNormaMaior(){
+        fLinhasMonolitico.add("1: se zero_a então vá_para 5 senão vá_para 2");
+        fLinhasMonolitico.add("2: se zero_b então vá_para 9 senão vá_para 3");
         fLinhasMonolitico.add("3: faça sub_a vá_para 4");
         fLinhasMonolitico.add("4: faça sub_b vá_para 1");
-        fLinhasMonolitico.add("5: se zero_b então vá_para 1 senão vá_para 10");
+        /*Só entrará aqui para Retornar TRUE*/
+        fLinhasMonolitico.add("5: faça add_a vá_para 6");
+        fLinhasMonolitico.add("6: se zero_a então vá_para 9 senão vá_para 10");
     }
     
     public boolean executa(){

@@ -16,8 +16,16 @@ public class InterpretadorMonolitico {
     private static ArrayList<Registrador> fListRegistradores = new ArrayList();
     private int fLinhaAtual = 0;
     private int fSubLinha = 0;
-    private frmPrincipal frmPrincipal;
+    private final frmPrincipal frmPrincipal;
     
+    /**
+     * Método contrutor, será inicializado pelo FrmPrincipal e pelas Classes 
+     * MaiorMenor e Igual.
+     * @param byListString
+     * @param byListRegistradores
+     * @param byForm
+     * @param bySubLinha 
+     */
     public InterpretadorMonolitico(ArrayList<String> byListString, ArrayList<Registrador> byListRegistradores, JFrame byForm, int bySubLinha) {
         this.fListLinhas = byListString;
         this.fListRegistradores = byListRegistradores;
@@ -27,6 +35,11 @@ public class InterpretadorMonolitico {
         }
     }
 
+    /**
+     * Método principal que irá ficar e loop identificando cada linha e tratando
+     * as operações necessárias.
+     * @return 
+     */
     public boolean executar() {
         String mLinha = "";
         boolean mRetorno = false;
@@ -55,6 +68,12 @@ public class InterpretadorMonolitico {
         return mRetorno;
     }
     
+    /**
+     * Método para tratamento do "se", o mesmo deve ter uma condição, um retorno
+     * caso condição True e um para caso Condição False.
+     * @param byLinha
+     * @return 
+     */
     private boolean processarCondicional(String byLinha) {        
         boolean mRetorno = false;
         String condicao = byLinha.substring(byLinha.indexOf("se") + 2, byLinha.indexOf("então")).trim();
@@ -80,6 +99,11 @@ public class InterpretadorMonolitico {
         }
     }
     
+    /**
+     * Reponsável pelo tratamento do faça. Faça é composto por uma ação, nesse 
+     * caso um add ou sub e em seguida pode ter um vá_para.
+     * @param byLinha 
+     */
     private void ProcessaFaca(String byLinha){
         String mPartes[] = byLinha.split(" ");
         ProcessaOperacao(mPartes[1]);
@@ -90,6 +114,10 @@ public class InterpretadorMonolitico {
         }        
     }
     
+    /**
+     * Processará as operações de Soma, Subtração e os Saltos entre linhas.
+     * @param byLinha 
+     */
     private void ProcessaOperacao(String byLinha){
         if(byLinha.contains("add_")){
             Macro.Add(byLinha);
@@ -100,6 +128,11 @@ public class InterpretadorMonolitico {
         }
     }
    
+    /**
+     * Irá setar no contador geral a linha que deve continuar lendo. Subtrai um
+     * pois uso o contador em um ArrayList.
+     * @param linha 
+     */
     private void processarSalto(String linha) {
         String[] partes = linha.trim().split(" ");
         fLinhaAtual = Integer.parseInt(partes[1]) - 1;

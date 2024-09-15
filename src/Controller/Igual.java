@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 /**
- *
+ * Classe do Igual. Receberá a condição e a linha, para 
  * @author PC
  */
 public class Igual {
@@ -22,7 +22,6 @@ public class Igual {
     public Igual(String byCondicao, JFrame byFrm, int byLinha) {
         this.frmPrincipal = (frmPrincipal) byFrm;        
         this.fLinhaPai = byLinha;
-        //Considerando que a entrada do MaiorMenor seja: igual_a_b
         String[] mSplitCond = byCondicao.split("_");
         Registrador reg1 = new Registrador(0, InterpretadorMonolitico.BuscaValorRegistrador(mSplitCond[1]));
         fListRegistradores.add(reg1);

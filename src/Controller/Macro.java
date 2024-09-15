@@ -7,7 +7,10 @@ package Controller;
 import javax.swing.JFrame;
 
 /**
- *
+ * Classe que irá fazer o pré tratamento e chamada das próximas operações(add,
+ * sub, maior/menor e igual)
+ * Todos os métodos terão split para identificar o registrador e seu valor, seguido
+ * pela declaração o objeto da ação.
  * @author PC
  */
 public class Macro {
@@ -35,6 +38,11 @@ public class Macro {
        
     /**
      * byMenorMaior: 1 - Menor | 2 - Maior
+     * @param byCondicao
+     * @param byFrm
+     * @param byLinhaPai
+     * @param byMenorMaior
+     * @return 
      */
     public static boolean MenorMaior(String byCondicao, JFrame byFrm, int byLinhaPai, int byMenorMaior){
         MaiorMenor mm = new MaiorMenor(byCondicao, byFrm, byLinhaPai, byMenorMaior);

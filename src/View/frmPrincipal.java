@@ -26,8 +26,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         txtResultado.setEditable(false);
-        
-        txtCaminho.setText("C:\\Users\\PC\\Documents\\GitHub\\MaquinaUniversal\\EntradaTesteMenor.txt");
     }
 
     /**
@@ -164,7 +162,7 @@ public class frmPrincipal extends javax.swing.JFrame {
             fListRegistradores.add(reg);
         }
         
-        //Transforma o arquivo lido em linhas para poder tratar.
+        //Transforma o arquivo lido em linhas para salvar o ArrayList e poder tratar.
         try (BufferedReader br = new BufferedReader(new FileReader(txtCaminho.getText()))) {
             String linha;
             while ((linha = br.readLine()) != null) {
